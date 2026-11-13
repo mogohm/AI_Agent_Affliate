@@ -1,0 +1,4 @@
+product_id,platform,shop_id,shop_name,title,brand,category,price,commission_rate,commission_cap,rating,rating_count,sold,product_url,affiliate_url,image_url
+E2E-1001,shopee,e2e-shop,E2E Test Shop,E2E ทดสอบ ไมโครโฟนไร้สายสำหรับไลฟ์สด,E2EBrand,อุปกรณ์ครีเอเตอร์,1590,15,500,4.7,820,3100,https://shopee.co.th/e2e-1001,https://s.shopee.co.th/e2e-1001,
+E2E-1002,lazada,e2e-shop-2,E2E Test Store,E2E ทดสอบ หม้อทอดไร้น้ำมัน 4 ลิตร,E2EHome,เครื่องใช้ในบ้าน,2290,6,,4.5,410,1200,https://www.lazada.co.th/e2e-1002,,
+E2E-1003,shopee,e2e-shop,E2E Test Shop,E2E ทดสอบ ขวดน้ำเก็บอุณหภูมิ,,ไลฟ์สไตล์,350,8,,,,,https://shopee.co.th/e2e-1003,,

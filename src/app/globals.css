@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens from AI_Affiliate_Studio_Design_Prototype.html
+ *   Theme A — Command Center (dark, default)
+ *   Theme B — Creative Studio (light)
+ *   Theme C — Automation Factory (green)
+ */
+:root,
+[data-theme="A"] {
+  --bg: #080e1d;
+  --side: #0a1225;
+  --surface: #101a30;
+  --surface2: #14213b;
+  --muted: #8999b6;
+  --text: #eef3ff;
+  --accent: #8d7dfb;
+  --accent2: #59c7f9;
+  --accent-fg: #ffffff;
+  --line: #24324b;
+  --good: #37d2a4;
+  --warn: #ffbf69;
+  --danger: #fb8797;
+  --hero: linear-gradient(118deg, #38347a, #233f7f 55%, #14546f);
+  --hero-fg: #ffffff;
+  --shadow: 0 20px 60px #0002;
+  --primary-grad: linear-gradient(125deg, var(--accent), #665be4);
+  --chart-1: #8d7dfb;
+  --chart-2: #3a9fd6;
+  --chart-3: #2fb38c;
+  --chart-4: #d99a45;
+  color-scheme: dark;
+}
+
+[data-theme="B"] {
+  --bg: #f6f4ff;
+  --side: #ffffff;
+  --surface: #ffffff;
+  --surface2: #f2f0ff;
+  --muted: #6f6a8c;
+  --text: #242243;
+  --accent: #8c56dc;
+  --accent2: #a24fc4;
+  --accent-fg: #ffffff;
+  --line: #e5def0;
+  --good: #168e75;
+  --warn: #b0661f;
+  --danger: #c4466f;
+  --hero: linear-gradient(118deg, #995ac9, #d28eba 65%, #f3bb98);
+  --hero-fg: #ffffff;
+  --shadow: 0 12px 26px #54418b0b;
+  --primary-grad: linear-gradient(125deg, var(--accent), #6f3fc0);
+  --chart-1: #8c56dc;
+  --chart-2: #b4559a;
+  --chart-3: #168e75;
+  --chart-4: #c87a32;
+  color-scheme: light;
+}
+
+[data-theme="C"] {
+  --bg: #080e0e;
+  --side: #071312;
+  --surface: #0d201e;
+  --surface2: #11302b;
+  --muted: #84a99d;
+  --text: #e7fff2;
+  --accent: #13bd89;
+  --accent2: #7befc2;
+  --accent-fg: #041d16;
+  --line: #21433a;
+  --good: #7beaaf;
+  --warn: #e6ca66;
+  --danger: #ff7a75;
+  --hero: linear-gradient(115deg, #0a584d, #125e45 56%, #13442b);
+  --hero-fg: #ffffff;
+  --shadow: 0 20px 50px #0002;
+  --primary-grad: linear-gradient(120deg, #45d8a1, #10a87e);
+  --chart-1: #13bd89;
+  --chart-2: #3fa7c9;
+  --chart-3: #c9ad45;
+  --chart-4: #5aa9e6;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-side: var(--side);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface2);
+  --color-muted: var(--muted);
+  --color-fg: var(--text);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent2);
+  --color-accent-fg: var(--accent-fg);
+  --color-line: var(--line);
+  --color-good: var(--good);
+  --color-warn: var(--warn);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-thai), "Segoe UI", Tahoma, Arial, sans-serif;
+  --radius-card: 18px;
+  --shadow-card: var(--shadow);
+}
+
+* {
+  border-color: var(--line);
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+body {
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+input[type="checkbox"] {
+  accent-color: var(--accent);
+  width: 15px;
+  height: 15px;
+}
+
+.bg-hero {
+  background: var(--hero);
+  color: var(--hero-fg);
+}
+
+.bg-primary-grad {
+  background: var(--primary-grad);
+  color: var(--accent-fg);
+}
+
+.hero-rings::before {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border: 1px solid #ffffff25;
+  border-radius: 50%;
+  right: -40px;
+  top: -125px;
+  box-shadow: 0 0 0 48px #ffffff08, 0 0 0 100px #ffffff07;
+  pointer-events: none;
+}
+
+.nav-active {
+  color: var(--text);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 24%, transparent), color-mix(in srgb, var(--accent) 3%, transparent));
+  box-shadow: inset 3px 0 var(--accent);
+}
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
