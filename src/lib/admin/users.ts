@@ -2,7 +2,7 @@ import crypto from "node:crypto";
 import { and, asc, count, eq } from "drizzle-orm";
 import type { Db } from "@/db/client";
 import { users, workspaceMembers } from "@/db/schema";
-import { hashPasswordRaw } from "@/lib/auth/password";
+import { hashPasswordRaw, verifyPasswordRaw } from "@/lib/auth/password";
 import type { Role } from "@/lib/auth/permissions";
 import { ApiError } from "@/lib/api";
 
@@ -77,4 +77,12 @@ export async function updateMember(
   }
   if (Object.keys(userSet).length) await db.update(users).set(userSet).where(eq(users.id, userId));
   return { temporaryPassword };
+}
+
+/** Self-service password change: requires the current password. */
+export async function changeOwnPassword(db: Db, userId: string, currentPassword: string, newPassword: string) {
+  const [u] = await db.select({ hash: users.passwordHash }).from(users).where(eq(users.id, userId));
+  if (!u || !(await verifyPasswordRaw(currentPassword, u.hash))) throw new ApiError(400, "รหัสผ่านปัจจุบันไม่ถูกต้อง", "invalid_current_password");
+  if (currentPassword === newPassword) throw new ApiError(400, "รหัสผ่านใหม่ต้องไม่ซ้ำกับรหัสเดิม", "same_password");
+  await db.update(users).set({ passwordHash: await hashPasswordRaw(newPassword) }).where(eq(users.id, userId));
 }

@@ -10,6 +10,7 @@ export const ROLE_LABELS: Record<Role, string> = {
 };
 
 const P = {
+  "account:self": ["admin", "editor", "approver", "viewer"],
   "products:read": ["admin", "editor", "approver", "viewer"],
   "products:write": ["admin", "editor"],
   "video:read": ["admin", "editor", "approver", "viewer"],

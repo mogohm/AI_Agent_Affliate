@@ -11,6 +11,8 @@ import {
   Clapperboard,
   TrendingUp,
   Settings,
+  Users,
+  UserCog,
   LogOut,
   Plus,
   Menu,
@@ -62,7 +64,11 @@ export function AppShell({
     { href: "/library", label: "คลิปและการเผยแพร่", title: "คอนเทนต์และการเผยแพร่", icon: Clapperboard, count: stats.review },
     { href: "/analytics", label: "รายได้และวิเคราะห์", title: "รายได้และวิเคราะห์", icon: TrendingUp },
   ];
-  const admin: NavItem[] = [{ href: "/settings", label: "เชื่อมต่อและตั้งค่า", title: "ตั้งค่าและเชื่อมต่อ", icon: Settings }];
+  const admin: NavItem[] = [
+    ...(can(session.role, "users:manage") ? [{ href: "/users", label: "ผู้ใช้งาน", title: "ผู้ใช้งาน", icon: Users }] : []),
+    { href: "/settings", label: "เชื่อมต่อและตั้งค่า", title: "ตั้งค่าและเชื่อมต่อ", icon: Settings },
+    { href: "/account", label: "บัญชีของฉัน", title: "บัญชีของฉัน", icon: UserCog },
+  ];
   const current = [...workspace, ...admin].find((n) => pathname === n.href || pathname.startsWith(`${n.href}/`));
 
   const chooseTheme = (t: ThemeKey) => {
