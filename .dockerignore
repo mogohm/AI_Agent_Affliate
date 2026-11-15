@@ -1,0 +1,22 @@
+node_modules/
+.next/
+out/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# local data (PGlite database, local object storage, render temp files)
+.data/
+
+# env / secrets
+.env
+.env.local
+.env.*.local
+
+# tests
+test-results/
+playwright-report/
+coverage/
+
+.DS_Store
+.vercel
