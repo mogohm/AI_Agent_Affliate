@@ -63,7 +63,8 @@ export function buildFfmpegArgs(o: { scenes: SceneMedia[]; width: number; height
     }
     const ovIdx = input++;
     args.push("-loop", "1", "-framerate", String(fps), "-t", segDur.toFixed(3), "-i", s.overlayPng);
-    filters.push(`[b${i}][${ovIdx}:v]overlay=0:0:shortest=1,format=yuv420p,trim=duration=${segDur.toFixed(3)},setpts=PTS-STARTPTS[v${i}]`);
+    // Trailing fps= forces a constant frame rate: FFmpeg 7.x xfade rejects inputs whose rate is unknown (1/0).
+    filters.push(`[b${i}][${ovIdx}:v]overlay=0:0:shortest=1,format=yuv420p,trim=duration=${segDur.toFixed(3)},setpts=PTS-STARTPTS,fps=${fps}[v${i}]`);
   });
   // transitions
   if (n === 1) filters.push(`[v0]null[vout]`);
