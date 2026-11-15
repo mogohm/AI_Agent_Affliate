@@ -28,4 +28,7 @@ COPY --from=build /app/worker ./worker
 COPY --from=build /app/src ./src
 COPY --from=build /app/tsconfig.json /app/next.config.ts /app/drizzle.config.ts ./
 EXPOSE 3000
-CMD ["npx", "next", "start"]
+# Bind explicitly: Fly sets HOSTNAME to the machine id, which would make Next listen on one interface only.
+# Cap the V8 heap so GC runs before the 1GB VM is exhausted (PGlite WASM memory sits outside the heap).
+ENV NODE_OPTIONS=--max-old-space-size=384
+CMD ["node_modules/.bin/next", "start", "-H", "0.0.0.0", "-p", "3000"]
