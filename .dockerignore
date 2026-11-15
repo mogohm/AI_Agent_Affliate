@@ -1,0 +1,12 @@
+node_modules
+.next
+.data
+.git
+.env
+.env.*
+!.env.example
+test-results
+playwright-report
+coverage
+*.tsbuildinfo
+AI_Affiliate_Studio_Design_Package

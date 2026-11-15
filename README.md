@@ -87,6 +87,18 @@ workspaces, users, workspace_members, audit_logs, app_settings, marketplace_conn
 6. Settings → AI Providers: ใส่ OpenAI key, ตรวจราคา/โมเดล, ตั้งงบประมาณ แล้วจึงเปิด Live mode
 7. ตรวจ Remotion license หากองค์กรมีพนักงานเกิน 3 คน (ใช้ `@remotion/player` สำหรับ preview)
 
+### Fly.io (single machine, lowest cost)
+`fly.toml` + `Dockerfile` run web + inline worker + PGlite + local storage on one machine with a volume (no Neon/Redis/S3).
+
+```bash
+fly launch --no-deploy --copy-config          # keep fly.toml; change `app` if the name is taken
+fly volumes create aas_data --region sin --size 1
+fly secrets set AUTH_SECRET=$(openssl rand -hex 32) APP_ENCRYPTION_KEY=$(openssl rand -hex 32) \
+  APP_URL=https://<app>.fly.dev SEED_ADMIN_PASSWORD='<strong password>'
+fly deploy
+```
+Keep exactly **one** machine (PGlite is single-process). `auto_stop_machines` stops it when idle; queued/interrupted jobs resume on next start.
+
 ### Known limitations / next steps
 - Login rate limiting is in-memory (move to Redis for multi-instance)
 - Live OpenAI/Sora/Shopee paths are unit-tested with mocks only — run a supervised smoke test with real credentials and a small budget
